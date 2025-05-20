@@ -22,10 +22,10 @@ jobs:
       with:
         dotnet-version: "9.0.x"
 
-   # - name: Install LLVM and Clang
-   #   uses: KyleMayes/install-llvm-action@v2
-   #   with:
-   #     version: "20.1"
+    - name: Install LLVM and Clang
+      uses: KyleMayes/install-llvm-action@v2
+      with:
+        version: "20.1"
         
     - name: Install ClangSharpPInvokeGenerator
       run: dotnet tool install --global ClangSharpPInvokeGenerator --version 20.1.2
