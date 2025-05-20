@@ -27,7 +27,7 @@ jobs:
       
     - name: Generate bindings
       run: |
-        clangsharppinvokegenerator --methodClassName StbImage -c multi-file generate-file-scoped-namespaces generate-helper-types -a -DSTB_IMAGE_IMPLEMENTATION --file ./3rd-party/stb/stb_image.h -o CsStb.Image/ --namespace CsStb --prefixStrip stbi_ 
+        dotnet tool run clangsharppinvokegenerator --methodClassName StbImage -c multi-file generate-file-scoped-namespaces generate-helper-types -a -DSTB_IMAGE_IMPLEMENTATION --file ./3rd-party/stb/stb_image.h -o CsStb.Image/ --namespace CsStb --prefixStrip stbi_ 
       
     - name: Commit generated files
       run: |
