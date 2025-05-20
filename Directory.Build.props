@@ -1,0 +1,9 @@
+<Project>
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net8.0;net9.0</TargetFrameworks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ImplicitUsings>false</ImplicitUsings>
+        <RootNamespace>CsStb</RootNamespace>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+</Project>
