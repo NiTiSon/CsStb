@@ -1,1 +1,38 @@
 name: Generate Sources
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "3rd-party/**"
+  pull_request:
+    paths:
+      - "3rd-party/**"
+
+jobs:
+  generate-bindings:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: "8.0.x"
+        
+    - name: Install ClangSharpPInvokeGenerator
+      run: dotnet tool install --local ClangSharpPInvokeGenerator --version 20.1.2
+      
+    - name: Generate bindings
+      run: |
+        clangsharppinvokegenerator --methodClassName StbImage -c multi-file generate-file-scoped-namespaces generate-helper-types -a -DSTB_IMAGE_IMPLEMENTATION --file ./3rd-party/stb/stb_image.h -o CsStb.Image/ --namespace CsStb --prefixStrip stbi_ 
+      
+    - name: Commit generated files
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add "**.cs"
+        git commit -m "Update generated bindings [skip ci]" || echo "No changes to commit"
+        git push
